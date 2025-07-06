@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:client": "cd client && npm run dev",
-    "start:server": "cd server && node server.js",
-    "weather-app": "concurrently \"npm run start:client\" \"npm run start:server\""
+  "start:client": "cd client && npm run dev",
+  "start:server": "cd server && npx nodemon server.js",
+  "weather-app": "concurrently \"npm run start:client\" \"npm run start:server\""
   },
   "keywords": [],
   "author": "",
