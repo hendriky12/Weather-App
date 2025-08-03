@@ -1,0 +1,78 @@
+html {
+  background-color: #2a2a2a;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.webName {
+  display: flex;
+  align-items: center;
+}
+
+.webName img {
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+}
+
+.webName h1 {
+  color: white;
+}
+
+.githubIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.githubIcon:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+.data {
+  height: 80vh;
+  margin: 0rem 0.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.RFandPM25 {
+  display: flex;
+  flex-direction: column;
+}
+
+.rainfall,
+.pm25 {
+  border: red solid 1px;
+  height: 14rem;
+  width: 14em;
+}
+
+.rainfall {
+  margin-bottom: 0.8rem;
+}
+
+.forecast {
+  display: flex;
+  flex-direction: column;
+}
+
+.twentyfour,
+.next4 {
+  border: red solid 1px;
+  height: 14rem;
+  width: 62rem;
+}
+
+.twentyfour {
+  margin-bottom: 0.8rem;
+}
