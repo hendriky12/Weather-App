@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const rainfallValueElem = document.getElementById("rainfall-value");
-    rainfallValueElem.textContent = `Rainfall: ${reading.value} mm`;
+    rainfallValueElem.textContent = `${reading.value} mm`;
 
     console.log(`Time: ${data.data.readings[0].timestamp}`);
     console.log(`Rainfall: ${reading.value} mm`);
@@ -60,13 +60,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const westPM25 = readings.west; //for future implemetation, duplicate this line for other regions
-    const pm25TimeElem = document.getElementById("pm25-time");
     const pm25ValueElem = document.getElementById("pm25-value");
     console.log("PM2.5 One Hour Average (West Region):");
     console.log(`Time: ${timestamp}`);
     console.log(`PM2.5 (West): ${westPM25}`);
     //Update the content
-    pm25ValueElem.textContent = `PM2.5 (West): ${westPM25}`;
+    pm25ValueElem.textContent = `${westPM25} µg/m³`;
   } catch (error) {
     console.error("Error fetching PM2.5 data:", error);
   }
@@ -115,19 +114,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await res.json();
 
     const forecasts = data.data.records[0].forecasts;
-    const forecastList = document.getElementById("forecast-list");
-    forecastList.innerHTML = ""; // Clear previous content
+    const d1 = document.getElementById("d1");
+    const d2 = document.getElementById("d2");
+    const d3 = document.getElementById("d3");
+    const d4 = document.getElementById("d4");
+    forecasts.innerHTML = ""; // Clear previous content
     forecasts.forEach((f) => {
       console.log(
         `${f.day}: ${f.forecast.text} (${f.temperature.low}–${f.temperature.high}°C)`
       );
 
-      // Create a list item for each forecast day
-      const li = document.createElement("li");
-      li.textContent = `${f.day}: ${f.forecast.text} (${f.temperature.low}–${f.temperature.high}°C)`;
-      forecastList.appendChild(li);
+      if (forecasts[0]) {
+        d1.textContent = `${forecasts[0].day}: ${forecasts[0].forecast.text} (${forecasts[0].temperature.low}–${forecasts[0].temperature.high}°C)`;
+      }
+      if (forecasts[1]) {
+        d2.textContent = `${forecasts[1].day}: ${forecasts[1].forecast.text} (${forecasts[1].temperature.low}–${forecasts[1].temperature.high}°C)`;
+      }
+      if (forecasts[2]) {
+        d3.textContent = `${forecasts[2].day}: ${forecasts[2].forecast.text} (${forecasts[2].temperature.low}–${forecasts[2].temperature.high}°C)`;
+      }
+      if (forecasts[3]) {
+        d4.textContent = `${forecasts[3].day}: ${forecasts[3].forecast.text} (${forecasts[3].temperature.low}–${forecasts[3].temperature.high}°C)`;
+      }
     });
   } catch (error) {
     console.error("Error fetching next 4 days data:", error);
   }
 });
+
+
+
+// 1-hr PM2.5 reading (µg/m3)	Band	Descriptor
+// 0 - 55	1	Normal
+// 56 - 150	2	Elevated
+// 151 - 250	3	High
+// >=251	4	Very High

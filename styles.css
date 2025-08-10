@@ -2,6 +2,7 @@ html {
   background-color: #2a2a2a;
   font-family: "Roboto", sans-serif;
   overflow: hidden;
+  color: white;
 }
 
 header {
@@ -31,7 +32,6 @@ header {
   height: 2.5rem;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
-
 .githubIcon:hover {
   transform: scale(1.1);
   opacity: 0.85;
@@ -39,7 +39,7 @@ header {
 
 .data {
   height: 80vh;
-  margin: 0rem 0.5rem;
+  margin: 0 0.5rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -51,8 +51,15 @@ header {
 }
 
 .rainfall,
+.pm25,
+.shortTermForecast,
+.next4 {
+  background-color: rgb(65, 62, 62);
+  border-radius: 0.5rem;
+}
+
+.rainfall,
 .pm25 {
-  border: red solid 1px;
   height: 14rem;
   width: 14em;
 }
@@ -68,11 +75,49 @@ header {
 
 .shortTermForecast,
 .next4 {
-  border: red solid 1px;
   height: 14rem;
   width: 62rem;
 }
 
 .shortTermForecast {
   margin-bottom: 0.8rem;
+}
+
+.shortTermOutlook,
+.next4-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.2rem;
+}
+
+.next4-content {
+  flex-wrap: wrap;
+}
+
+.forecast-day,
+#two-hour-forecast,
+#next-24-hours {
+  background-color: white;
+  height: 8rem;
+  width: 8rem;
+}
+
+#next-24-hours {
+  width: 50rem; 
+}
+
+#rainfall-value,
+#pm25-value {
+  font-size: 2rem;
+  color: white;
+}
+
+h2 {
+  margin-left: 1.2rem;
+}
+
+#two-hour-forecast,
+#next-24-hours,
+.forecast-day {
+  color: black;
 }
