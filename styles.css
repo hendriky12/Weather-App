@@ -66,13 +66,13 @@ header {
   flex-direction: column;
 }
 
-.twentyfour,
+.shortTermForecast,
 .next4 {
   border: red solid 1px;
   height: 14rem;
   width: 62rem;
 }
 
-.twentyfour {
+.shortTermForecast {
   margin-bottom: 0.8rem;
 }
