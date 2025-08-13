@@ -9,6 +9,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     return "🌤️"; // default partly sunny
   };
 
+  function getRainfallBandDescriptor(value) {
+    if (value === 0) {
+      return { band: 1, descriptor: "No Rain" };
+    } else if (value > 0 && value <= 5) {
+      return { band: 2, descriptor: "Light Rain" };
+    } else if (value > 5 && value <= 20) {
+      return { band: 3, descriptor: "Moderate Rain" };
+    } else {
+      return { band: 4, descriptor: "Heavy Rain" };
+    }
+  }
+
   //rainfall data
   try {
     const res = await fetch(
@@ -33,13 +45,29 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    const rainfallValueElem = document.getElementById("rainfall-value");
-    rainfallValueElem.textContent = `${reading.value} mm`;
+    const rainfallValueElem = document.getElementById("rainfall-number");
+    rainfallValueElem.textContent = reading.value;
+    const rainfallBandElem = document.getElementById("rainfall-band");
+    rainfallBandElem.textContent = `Band ${
+      getRainfallBandDescriptor(reading.value).band
+    } - ${getRainfallBandDescriptor(reading.value).descriptor}`;
 
     console.log(`Time: ${data.data.readings[0].timestamp}`);
     console.log(`Rainfall: ${reading.value} mm`);
   } catch (error) {
     console.error("Error fetching data:", error);
+  }
+
+  function getPM25BandDescriptor(value) {
+    if (value >= 0 && value <= 55) {
+      return { band: 1, descriptor: "Normal" };
+    } else if (value >= 56 && value <= 150) {
+      return { band: 2, descriptor: "Elevated" };
+    } else if (value >= 151 && value <= 250) {
+      return { band: 3, descriptor: "High" };
+    } else {
+      return { band: 4, descriptor: "Very High" };
+    }
   }
 
   // PM2.5 data
@@ -60,12 +88,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const westPM25 = readings.west; //for future implemetation, duplicate this line for other regions
-    const pm25ValueElem = document.getElementById("pm25-value");
+    const pm25ValueElem = document.getElementById("pm25-number");
+    const pm25BandElem = document.getElementById("pm25-band");
     console.log("PM2.5 One Hour Average (West Region):");
     console.log(`Time: ${timestamp}`);
     console.log(`PM2.5 (West): ${westPM25}`);
     //Update the content
-    pm25ValueElem.textContent = `${westPM25} µg/m³`;
+    pm25ValueElem.textContent = westPM25;
+    pm25BandElem.textContent = `Band ${
+      getPM25BandDescriptor(westPM25).band
+    } - ${getPM25BandDescriptor(westPM25).descriptor}`;
   } catch (error) {
     console.error("Error fetching PM2.5 data:", error);
   }
@@ -141,8 +173,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error fetching next 4 days data:", error);
   }
 });
-
-
 
 // 1-hr PM2.5 reading (µg/m3)	Band	Descriptor
 // 0 - 55	1	Normal

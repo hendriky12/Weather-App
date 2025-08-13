@@ -103,13 +103,7 @@ header {
 }
 
 #next-24-hours {
-  width: 50rem; 
-}
-
-#rainfall-value,
-#pm25-value {
-  font-size: 2rem;
-  color: white;
+  width: 50rem;
 }
 
 h2 {
@@ -120,4 +114,26 @@ h2 {
 #next-24-hours,
 .forecast-day {
   color: black;
+}
+
+#rainfall-number,
+#pm25-number {
+  font-size: 5rem; /* big number */
+  font-weight: bold;
+  line-height: 1;
+}
+
+.pm25-value,
+.rainfall-value {
+  margin: 1.2rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+#rainfall-unit,
+#pm25-unit {
+  font-size: 1rem; /* smaller unit */
+  vertical-align: super; /* optional: superscript style for "³" or you can leave normal */
+  margin-left: 0.4rem;
 }
