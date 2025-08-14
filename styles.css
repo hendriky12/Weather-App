@@ -99,7 +99,7 @@ header {
 #next-24-hours {
   background-color: #535353;
   height: 8rem;
-  width: 8rem;
+  width: 9rem;
   border-radius: 0.5rem;
 }
 
@@ -116,18 +116,17 @@ header {
   color: white !important;
 }
 
+.shortTermForecast #two-hour-forecast,
+.shortTermForecast #next-24-hours {
+  color: white !important;
+}
+
 #next-24-hours {
   width: 50rem;
 }
 
 h2 {
   margin-left: 1.2rem;
-}
-
-#two-hour-forecast,
-#next-24-hours,
-.forecast-day {
-  color: black;
 }
 
 #rainfall-number,
@@ -150,4 +149,10 @@ h2 {
   font-size: 1rem; /* smaller unit */
   vertical-align: super; /* optional: superscript style for "³" or you can leave normal */
   margin-left: 0.4rem;
+}
+
+#two-hour-forecast {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
