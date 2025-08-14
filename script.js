@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getRainfallBandDescriptor(value) {
     if (value === 0) {
-      return { band: 1, descriptor: "No Rain" };
+      return { band: 1, descriptor: "No umbrella needed ☀️" };
     } else if (value > 0 && value <= 5) {
-      return { band: 2, descriptor: "Light Rain" };
+      return { band: 2, descriptor: "Maybe take an umbrella ☔" };
     } else if (value > 5 && value <= 20) {
-      return { band: 3, descriptor: "Moderate Rain" };
+      return { band: 3, descriptor: "Umbrella a must 🌧" };
     } else {
-      return { band: 4, descriptor: "Heavy Rain" };
+      return { band: 4, descriptor: "Stay indoors ☔" };
     }
   }
 
@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const rainfallValueElem = document.getElementById("rainfall-number");
     rainfallValueElem.textContent = reading.value;
     const rainfallBandElem = document.getElementById("rainfall-band");
-    rainfallBandElem.textContent = `Band ${
-      getRainfallBandDescriptor(reading.value).band
-    } - ${getRainfallBandDescriptor(reading.value).descriptor}`;
+    rainfallBandElem.textContent = `${
+      getRainfallBandDescriptor(reading.value).descriptor
+    }`;
 
     console.log(`Time: ${data.data.readings[0].timestamp}`);
     console.log(`Rainfall: ${reading.value} mm`);
@@ -60,13 +60,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getPM25BandDescriptor(value) {
     if (value >= 0 && value <= 55) {
-      return { band: 1, descriptor: "Normal" };
+      return { band: 1, descriptor: "Easy Breathing 🌬" };
     } else if (value >= 56 && value <= 150) {
-      return { band: 2, descriptor: "Elevated" };
+      return { band: 2, descriptor: "Sensitive? Mask Up 😷" };
     } else if (value >= 151 && value <= 250) {
-      return { band: 3, descriptor: "High" };
+      return { band: 3, descriptor: "Limit outdoor time 🚶‍♂️" };
     } else {
-      return { band: 4, descriptor: "Very High" };
+      return { band: 4, descriptor: "Stay indoors 🏠" };
     }
   }
 
@@ -95,9 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(`PM2.5 (West): ${westPM25}`);
     //Update the content
     pm25ValueElem.textContent = westPM25;
-    pm25BandElem.textContent = `Band ${
-      getPM25BandDescriptor(westPM25).band
-    } - ${getPM25BandDescriptor(westPM25).descriptor}`;
+    pm25BandElem.textContent = `${getPM25BandDescriptor(westPM25).descriptor}`;
   } catch (error) {
     console.error("Error fetching PM2.5 data:", error);
   }
@@ -157,25 +155,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
 
       if (forecasts[0]) {
-        d1.textContent = `${forecasts[0].day}: ${forecasts[0].forecast.text} (${forecasts[0].temperature.low}–${forecasts[0].temperature.high}°C)`;
+        d1.innerHTML = `${forecasts[0].day}<br> ${forecasts[0].forecast.text}<br>(${forecasts[0].temperature.low}–${forecasts[0].temperature.high}°C)`;
       }
       if (forecasts[1]) {
-        d2.textContent = `${forecasts[1].day}: ${forecasts[1].forecast.text} (${forecasts[1].temperature.low}–${forecasts[1].temperature.high}°C)`;
+        d2.innerHTML = `${forecasts[1].day}<br> ${forecasts[1].forecast.text}<br>(${forecasts[1].temperature.low}–${forecasts[1].temperature.high}°C)`;
       }
       if (forecasts[2]) {
-        d3.textContent = `${forecasts[2].day}: ${forecasts[2].forecast.text} (${forecasts[2].temperature.low}–${forecasts[2].temperature.high}°C)`;
+        d3.innerHTML = `${forecasts[2].day}<br> ${forecasts[2].forecast.text}<br>(${forecasts[2].temperature.low}–${forecasts[2].temperature.high}°C)`;
       }
       if (forecasts[3]) {
-        d4.textContent = `${forecasts[3].day}: ${forecasts[3].forecast.text} (${forecasts[3].temperature.low}–${forecasts[3].temperature.high}°C)`;
+        d4.innerHTML = `${forecasts[3].day}<br> ${forecasts[3].forecast.text}<br>(${forecasts[3].temperature.low}–${forecasts[3].temperature.high}°C)`;
       }
     });
   } catch (error) {
     console.error("Error fetching next 4 days data:", error);
   }
 });
-
-// 1-hr PM2.5 reading (µg/m3)	Band	Descriptor
-// 0 - 55	1	Normal
-// 56 - 150	2	Elevated
-// 151 - 250	3	High
-// >=251	4	Very High

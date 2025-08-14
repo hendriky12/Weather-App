@@ -97,9 +97,23 @@ header {
 .forecast-day,
 #two-hour-forecast,
 #next-24-hours {
-  background-color: white;
+  background-color: #535353;
   height: 8rem;
   width: 8rem;
+  border-radius: 0.5rem;
+}
+
+.forecast-day {
+  margin: 0.5rem;
+  width: 13.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.next4-content .forecast-day {
+  color: white !important;
 }
 
 #next-24-hours {
