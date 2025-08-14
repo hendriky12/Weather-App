@@ -88,16 +88,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error fetching 2-hour forecast:", error);
   }
 
-  let tempLow = "",
-    tempHigh = "";
   try {
     const res = await fetch(
       "https://api-open.data.gov.sg/v2/real-time/api/twenty-four-hr-forecast"
     );
     const data = await res.json();
+    const general = data.data.records[0].general;
 
-    const general = data.data.records[0].general.forecast.text;
-    document.getElementById("next-24-hours").textContent = general;
+    // Extract useful info
+    const forecastText = general.forecast.text; // e.g., "Thundery Showers"
+    const tempLow = general.temperature.low; // 24
+    const tempHigh = general.temperature.high; // 32
+    const validPeriod = general.validPeriod.text; // "6 PM 14 Aug to 6 PM 15 Aug"
+    const humidityLow = general.relativeHumidity.low; // 60
+    const humidityHigh = general.relativeHumidity.high; // 95
+    const windLow = general.wind.speed.low; // 15
+    const windHigh = general.wind.speed.high; // 30
+
+    // Build display string
+    const next24Text = `
+    ${forecastText} (${tempLow}–${tempHigh}°C)<br>
+    Humidity: ${humidityLow}–${humidityHigh}%<br>
+    Wind: ${windLow}–${windHigh} km/h<br>
+    Valid: ${validPeriod}
+  `;
+
+    document.getElementById("next-24-hours").innerHTML = next24Text;
   } catch (error) {
     console.error("Error fetching 24-hour forecast:", error);
   }
